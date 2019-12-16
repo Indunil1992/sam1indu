@@ -9,9 +9,11 @@ exports.handler = async (event) => {
         }
     }).promise()
         .then(data => {
+            console.log("dataaa");
             // your code goes here
         })
         .catch(err => {
+               console.log("errrrrrrrrrr");
             // error handling goes here
         });
 
