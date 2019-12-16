@@ -1,0 +1,120 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "2f9297f3-540d-4e4f-9641-6cfd67ca7381": {
+        "id": "2f9297f3-540d-4e4f-9641-6cfd67ca7381",
+        "parent": null,
+        "name": "sam1indu",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1"
+        ],
+        "isRemovable": false,
+        "filePath": "sam1indu"
+      },
+      "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1": {
+        "id": "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1",
+        "parent": "2f9297f3-540d-4e4f-9641-6cfd67ca7381",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "sam1indu/lambda.js",
+        "code": "exports.handler = async (event) => {\n    \n    return {\"message\": \"Successfully executed\"};\n};",
+        "config": {
+          "runtime": "nodejs10.x",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "ddbtestIndu",
+            "config": {
+              "StartingPosition": "TRIM_HORIZON",
+              "BatchSize": "100",
+              "StreamViewType": "NEW_IMAGE"
+            }
+          }
+        ]
+      }
+    },
+    "rootNode": "2f9297f3-540d-4e4f-9641-6cfd67ca7381",
+    "openFiles": [
+      "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1"
+    ],
+    "currentFileId": "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1",
+    "resources": {
+      "ddbtestIndu": {
+        "name": "ddbtestIndu",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 0,
+          "table": {
+            "arn": "",
+            "name": "testIndu",
+            "partitionKey": "test",
+            "partitionKeyType": "S",
+            "hasSortKey": false,
+            "sortKey": "",
+            "sortKeyType": "S",
+            "payPerRequest": true,
+            "mode": 0
+          },
+          "isGlobalEditMode": false,
+          "parameters": {
+            "Key": {},
+            "Item": {},
+            "ExpressionAttributeValues": {}
+          },
+          "triggerParams": {
+            "StartingPosition": "TRIM_HORIZON",
+            "BatchSize": "100",
+            "StreamViewType": "NEW_IMAGE"
+          },
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": null
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "sam1indu",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1576472538067
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "sam1indu",
+      "url": "https://github.com/Indunil1992/sam1indu"
+    }
+  }
+}
