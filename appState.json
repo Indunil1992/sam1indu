@@ -8,7 +8,9 @@
         "type": "DIRECTORY",
         "isDirectory": true,
         "children": [
-          "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1"
+          "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1",
+          "8746b1e7-9cf3-4f6c-a011-f764f6064cec",
+          "5d4989be-73a7-4da3-babb-22608bfa6384"
         ],
         "isRemovable": false,
         "filePath": "sam1indu"
@@ -40,13 +42,43 @@
             "eventTemplate": "hello-world"
           }
         }
+      },
+      "8746b1e7-9cf3-4f6c-a011-f764f6064cec": {
+        "id": "8746b1e7-9cf3-4f6c-a011-f764f6064cec",
+        "parent": "2f9297f3-540d-4e4f-9641-6cfd67ca7381",
+        "name": "pythn.py",
+        "type": "PYTHON_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "sam1indu/pythn.py",
+        "code": "import boto3\nddb = boto3.client(\"dynamodb\")\n\ndef handler(event, context):\n    try:\n        data = ddb.get_item(\n            TableName=\"testIndu\",\n            Key={\n                'test': {\n                    'S': \"2\"\n                }\n            }\n        )\n    except BaseException as e:\n        print(e)\n        raise(e)\n    \n    return {\"message\": \"Successfully executed\"}\n",
+        "config": {
+          "runtime": "python3.6",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": []
+      },
+      "5d4989be-73a7-4da3-babb-22608bfa6384": {
+        "id": "5d4989be-73a7-4da3-babb-22608bfa6384",
+        "parent": "2f9297f3-540d-4e4f-9641-6cfd67ca7381",
+        "name": "__init__.py",
+        "type": "PYTHON_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "sam1indu/__init__.py",
+        "code": ""
       }
     },
     "rootNode": "2f9297f3-540d-4e4f-9641-6cfd67ca7381",
     "openFiles": [
-      "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1"
+      "8746b1e7-9cf3-4f6c-a011-f764f6064cec"
     ],
-    "currentFileId": "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1",
+    "currentFileId": "8746b1e7-9cf3-4f6c-a011-f764f6064cec",
     "resources": {
       "ddbtestIndu": {
         "name": "ddbtestIndu",
@@ -68,7 +100,7 @@
           "isGlobalEditMode": false,
           "parameters": {
             "Key": {
-              "test": "1"
+              "test": "2"
             },
             "Item": {},
             "ExpressionAttributeValues": {}
@@ -116,6 +148,14 @@
         "shouldPersist": false,
         "displayOnly": false,
         "editable": false
+      },
+      {
+        "lambdaId": "8746b1e7-9cf3-4f6c-a011-f764f6064cec",
+        "varKey": "PYTHONPATH",
+        "varValue": "/var/runtime:/var/task/sam1indu",
+        "shouldPersist": true,
+        "displayOnly": false,
+        "editable": true
       }
     ],
     "packageJSON": {
@@ -124,6 +164,13 @@
           "name": "aws-sdk",
           "language": "javascript",
           "version": "2.176.0",
+          "dev": true,
+          "notRemovable": false
+        },
+        "boto3": {
+          "name": "boto3",
+          "language": "python",
+          "version": "1.9.6",
           "dev": true,
           "notRemovable": false
         }
@@ -137,7 +184,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576475508582
+    "lastSave": 1576475780303
   },
   "VCS_STATE": {
     "provider": "GitHub",
