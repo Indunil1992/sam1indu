@@ -1,4 +1,5 @@
 let AWS = require('aws-sdk');
+const ses = new AWS.SES();
 const s3 = new AWS.S3();
 const ddb = new AWS.DynamoDB.DocumentClient();
 
@@ -55,7 +56,7 @@ exports.handler = async (event) => {
             }).promise()
                 .then(data => {
                     console.log(data);           // successful response
-                                        console.log("errr-s3-ok");
+                    console.log("errr-s3-ok");
 
                     /*
                     data = {
@@ -78,11 +79,36 @@ exports.handler = async (event) => {
                 })
                 .catch(err => {
                     console.log(err, err.stack); // an error occurred
-                                                            console.log("errr-s3-errr");
+                    console.log("errr-s3-errr");
 
                 });
             // error handling goes here
         });
+    ses.sendEmail({
+        Destination: {
+            ToAddresses: ['indunil@adroitlogic.com'],
+            CcAddresses: [],
+            BccAddresses: []
+        },
+        Message: {
+            Body: {
+                Text: {
+                    Data: ``
+                }
+            },
+            Subject: {
+                Data: 'test1'
+            }
+        },
+        Source: 'sachithrarajapakse1992@gmail.com',
+    }, function (err, data) {
+        if (err) {console.log(err, err.stack); // an error occurred
+                            console.log("ses-errr");}
+
+        else console.log(data); 
+                                    console.log("ses-passDataaa");
+        // successful response
+    });
 
     return { "message": "Successfully executed with DDB" };
 };

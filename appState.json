@@ -24,7 +24,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sam1indu/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst s3 = new AWS.S3();\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = async (event) => {\n    ddb.get({\n        TableName: \"testIndu\",\n        Key: {\n            test: \"1\"\n        }\n    }).promise()\n        .then(data => {\n            console.log(\"dataaa\");\n            s3.listObjects({\n                'Bucket': 'as2-test-lahiru',\n                'MaxKeys': 10,\n                'Prefix': ''\n            }).promise()\n                .then(data => {\n                    console.log(data);           // successful response\n                    console.log(\"pass-s3-ok\");\n\n                    /*\n                    data = {\n                        Contents: [\n                            {\n                               ETag: \"\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\"\",\n                               Key: \"example1.jpg\",\n                               LastModified: \"<Date Representation>\",\n                               Owner: {\n                                  DisplayName: \"myname\",\n                                  ID: \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                               },\n                               Size: 11,\n                               StorageClass: \"STANDARD\"\n                            },\n                            // {...}\n                        ]\n                    }\n                    */\n                })\n                .catch(err => {\n                    console.log(err, err.stack); // an error occurred\n                    console.log(\"pass-s3-errr\");\n\n                });\n            // your code goes here\n        })\n        .catch(err => {\n            console.log(\"errrrrrrrrrr\");\n            s3.listObjects({\n                'Bucket': 'indunil.trigger',\n                'MaxKeys': 10,\n                'Prefix': ''\n            }).promise()\n                .then(data => {\n                    console.log(data);           // successful response\n                                        console.log(\"errr-s3-ok\");\n\n                    /*\n                    data = {\n                        Contents: [\n                            {\n                               ETag: \"\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\"\",\n                               Key: \"example1.jpg\",\n                               LastModified: \"<Date Representation>\",\n                               Owner: {\n                                  DisplayName: \"myname\",\n                                  ID: \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                               },\n                               Size: 11,\n                               StorageClass: \"STANDARD\"\n                            },\n                            // {...}\n                        ]\n                    }\n                    */\n                })\n                .catch(err => {\n                    console.log(err, err.stack); // an error occurred\n                                                            console.log(\"errr-s3-errr\");\n\n                });\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed with DDB\" };\n};",
+        "code": "let AWS = require('aws-sdk');\nconst ses = new AWS.SES();\nconst s3 = new AWS.S3();\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = async (event) => {\n    ddb.get({\n        TableName: \"testIndu\",\n        Key: {\n            test: \"1\"\n        }\n    }).promise()\n        .then(data => {\n            console.log(\"dataaa\");\n            s3.listObjects({\n                'Bucket': 'as2-test-lahiru',\n                'MaxKeys': 10,\n                'Prefix': ''\n            }).promise()\n                .then(data => {\n                    console.log(data);           // successful response\n                    console.log(\"pass-s3-ok\");\n\n                    /*\n                    data = {\n                        Contents: [\n                            {\n                               ETag: \"\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\"\",\n                               Key: \"example1.jpg\",\n                               LastModified: \"<Date Representation>\",\n                               Owner: {\n                                  DisplayName: \"myname\",\n                                  ID: \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                               },\n                               Size: 11,\n                               StorageClass: \"STANDARD\"\n                            },\n                            // {...}\n                        ]\n                    }\n                    */\n                })\n                .catch(err => {\n                    console.log(err, err.stack); // an error occurred\n                    console.log(\"pass-s3-errr\");\n\n                });\n            // your code goes here\n        })\n        .catch(err => {\n            console.log(\"errrrrrrrrrr\");\n            s3.listObjects({\n                'Bucket': 'indunil.trigger',\n                'MaxKeys': 10,\n                'Prefix': ''\n            }).promise()\n                .then(data => {\n                    console.log(data);           // successful response\n                    console.log(\"errr-s3-ok\");\n\n                    /*\n                    data = {\n                        Contents: [\n                            {\n                               ETag: \"\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\"\",\n                               Key: \"example1.jpg\",\n                               LastModified: \"<Date Representation>\",\n                               Owner: {\n                                  DisplayName: \"myname\",\n                                  ID: \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                               },\n                               Size: 11,\n                               StorageClass: \"STANDARD\"\n                            },\n                            // {...}\n                        ]\n                    }\n                    */\n                })\n                .catch(err => {\n                    console.log(err, err.stack); // an error occurred\n                    console.log(\"errr-s3-errr\");\n\n                });\n            // error handling goes here\n        });\n    ses.sendEmail({\n        Destination: {\n            ToAddresses: ['indunil@adroitlogic.com'],\n            CcAddresses: [],\n            BccAddresses: []\n        },\n        Message: {\n            Body: {\n                Text: {\n                    Data: ``\n                }\n            },\n            Subject: {\n                Data: 'test1'\n            }\n        },\n        Source: 'sachithrarajapakse1992@gmail.com',\n    }, function (err, data) {\n        if (err) {console.log(err, err.stack); // an error occurred\n                            console.log(\"ses-errr\");}\n\n        else console.log(data); \n                                    console.log(\"ses-passDataaa\");\n        // successful response\n    });\n\n    return { \"message\": \"Successfully executed with DDB\" };\n};",
         "config": {
           "runtime": "nodejs10.x",
           "handler": "handler",
@@ -79,7 +79,7 @@
       "8746b1e7-9cf3-4f6c-a011-f764f6064cec",
       "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1"
     ],
-    "currentFileId": "8746b1e7-9cf3-4f6c-a011-f764f6064cec",
+    "currentFileId": "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1",
     "resources": {
       "ddbtestIndu": {
         "name": "ddbtestIndu",
@@ -135,6 +135,24 @@
             "name": "indunil.trigger"
           }
         }
+      },
+      "ses-sachithrarajapakse1992@gmail.com": {
+        "name": "ses-sachithrarajapakse1992@gmail.com",
+        "type": "SES",
+        "config": {
+          "selectedIdentity": "sachithrarajapakse1992@gmail.com",
+          "projectRegion": "us-east-1",
+          "params": {
+            "to": "indunil@adroitlogic.com",
+            "cc": "",
+            "bcc": "",
+            "subject": "test1",
+            "body": {
+              "text": "",
+              "html": ""
+            }
+          }
+        }
       }
     },
     "customTemplate": {
@@ -185,7 +203,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576476741540
+    "lastSave": 1576477177272
   },
   "VCS_STATE": {
     "provider": "GitHub",
