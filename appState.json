@@ -52,7 +52,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sam1indu/pythn.py",
-        "code": "import boto3\nddb = boto3.client(\"dynamodb\")\n\ndef handler(event, context):\n    try:\n        data = ddb.get_item(\n            TableName=\"testIndu\",\n            Key={\n                'test': {\n                    'S': \"2\"\n                }\n            }\n        )\n    except BaseException as e:\n        print(e)\n        raise(e)\n    \n    return {\"message\": \"Successfully executed\"}\n",
+        "code": "import boto3\nddb = boto3.client(\"dynamodb\")\n\ndef handler(event, context):\n    try:\n        data = ddb.get_item(\n            TableName=\"testIndu\",\n            Key={\n                'test': {\n                    'S': \"2\"\n                }\n            }\n        )\n    except BaseException as e:\n        print(e)\n        raise(e)\n    \n    return {\"message\": \"Successfully executed with pythn\"}\n",
         "config": {
           "runtime": "python3.6",
           "handler": "handler",
@@ -76,7 +76,8 @@
     },
     "rootNode": "2f9297f3-540d-4e4f-9641-6cfd67ca7381",
     "openFiles": [
-      "8746b1e7-9cf3-4f6c-a011-f764f6064cec"
+      "8746b1e7-9cf3-4f6c-a011-f764f6064cec",
+      "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1"
     ],
     "currentFileId": "8746b1e7-9cf3-4f6c-a011-f764f6064cec",
     "resources": {
@@ -184,7 +185,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576475780303
+    "lastSave": 1576476741540
   },
   "VCS_STATE": {
     "provider": "GitHub",
