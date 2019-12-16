@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sam1indu/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = async (event) => {\n    ddb.get({\n        TableName: \"testIndu\",\n        Key: {\n            test: \"1\"\n        }\n    }).promise()\n        .then(data => {\n            console.log(\"dataaa\");\n            // your code goes here\n        })\n        .catch(err => {\n               console.log(\"errrrrrrrrrr\");\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = async (event) => {\n    ddb.get({\n        TableName: \"testIndu\",\n        Key: {\n            test: \"1\"\n        }\n    }).promise()\n        .then(data => {\n            console.log(\"dataaa\");\n            // your code goes here\n        })\n        .catch(err => {\n               console.log(\"errrrrrrrrrr\");\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed with DDB\" };\n};",
         "config": {
           "runtime": "nodejs10.x",
           "handler": "handler",
@@ -115,7 +115,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576473404161
+    "lastSave": 1576473535125
   },
   "VCS_STATE": {
     "provider": "GitHub",
