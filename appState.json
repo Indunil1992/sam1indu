@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sam1indu/lambda.js",
-        "code": "exports.handler = async (event) => {\n    \n    return {\"message\": \"Successfully executed\"};\n};",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = async (event) => {\n    ddb.get({\n        TableName: \"testIndu\",\n        Key: {\n            test: \"1\"\n        }\n    }).promise()\n        .then(data => {\n            // your code goes here\n        })\n        .catch(err => {\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
         "config": {
           "runtime": "nodejs10.x",
           "handler": "handler",
@@ -30,16 +30,16 @@
           "memory": 128,
           "layers": []
         },
-        "triggers": [
-          {
-            "resourceName": "ddbtestIndu",
-            "config": {
-              "StartingPosition": "TRIM_HORIZON",
-              "BatchSize": "100",
-              "StreamViewType": "NEW_IMAGE"
-            }
+        "triggers": [],
+        "testCases": {
+          "d75da065-ed1b-4183-bb53-1e3345b98653": {
+            "id": "d75da065-ed1b-4183-bb53-1e3345b98653",
+            "name": "Test event",
+            "functionId": "33a0d41d-a53a-45e5-a2f2-a6a795ed0ae1",
+            "event": "{\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\",\r\n    \"key3\": \"value3\"\r\n}",
+            "eventTemplate": "hello-world"
           }
-        ]
+        }
       }
     },
     "rootNode": "2f9297f3-540d-4e4f-9641-6cfd67ca7381",
@@ -53,6 +53,7 @@
         "type": "DynamoDB",
         "config": {
           "mode": 0,
+          "operation": "get",
           "table": {
             "arn": "",
             "name": "testIndu",
@@ -66,15 +67,13 @@
           },
           "isGlobalEditMode": false,
           "parameters": {
-            "Key": {},
+            "Key": {
+              "test": "1"
+            },
             "Item": {},
             "ExpressionAttributeValues": {}
           },
-          "triggerParams": {
-            "StartingPosition": "TRIM_HORIZON",
-            "BatchSize": "100",
-            "StreamViewType": "NEW_IMAGE"
-          },
+          "triggerParams": {},
           "validator": {
             "validatableFields": {},
             "validity": true
@@ -98,7 +97,15 @@
       }
     ],
     "packageJSON": {
-      "dependencies": {}
+      "dependencies": {
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "language": "javascript",
+          "version": "2.176.0",
+          "dev": true,
+          "notRemovable": false
+        }
+      }
     }
   },
   "PROJECT_META": {
@@ -108,7 +115,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576472538067
+    "lastSave": 1576473218940
   },
   "VCS_STATE": {
     "provider": "GitHub",
